@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-const PORT = 4000;
+const PORT = ;
 
 app.get("/", (request: Request, response: Response) => { 
   response.status(200).send("Hello World");
@@ -14,5 +14,6 @@ app.get("/", (request: Request, response: Response) => {
 app.listen(PORT, () => { 
   console.log("Server running at PORT: ", PORT); 
 }).on("error", (error) => {
+  // gracefully handle error
   throw new Error(error.message);
 });
