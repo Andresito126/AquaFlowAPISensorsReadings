@@ -1,19 +1,35 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
+import express from 'express';
+import cors from "cors";
+import { config } from './core/config';
+import { measurementRouter } from './measurements/infraestructure/routes/Measurements_routes';
 
-// configures dotenv to work in your application
-dotenv.config();
 const app = express();
+const PORT = config.PORT_SERVER;
 
-const PORT = ;
+// middlewares
+app.use(express.json());
 
-app.get("/", (request: Request, response: Response) => { 
-  response.status(200).send("Hello World");
-}); 
+// domains for cors
+const allowedDomains = config.AVAILABLE_DOMAINS
+  ? config.AVAILABLE_DOMAINS.split(',').map(domain => domain.trim())
+  : [];
 
-app.listen(PORT, () => { 
-  console.log("Server running at PORT: ", PORT); 
-}).on("error", (error) => {
-  // gracefully handle error
-  throw new Error(error.message);
-});
+console.log("Allowed domains")
+console.log(allowedDomains)
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedDomains.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+
+// resources
+app.use("/measurements", measurementRouter);  
+
+app.listen(PORT,() => { console.log("Server running on http://localhost:" + PORT )});
