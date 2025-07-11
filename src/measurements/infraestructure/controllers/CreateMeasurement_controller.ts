@@ -15,6 +15,8 @@ export class CreateMeasurementController {
 
       await this.createMeasurementUseCase.execute(measurementDTO);
 
+      return res.status(201).json({ message: "Measurement created successfully" });
+
     } catch (err) {
 
       if (err instanceof InvalidArgumentError) {
@@ -26,7 +28,7 @@ export class CreateMeasurementController {
       }
 
       return res.status(500).send({ status: "Error", message: "Server error: unknown error" });
-      
+
     }
 
   }
