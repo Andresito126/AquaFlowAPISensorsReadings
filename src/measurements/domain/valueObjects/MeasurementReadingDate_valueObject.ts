@@ -1,9 +1,24 @@
 import { InvalidArgumentError } from "../../../shared/errors/InvalidArgument_error";
 
 export class MeasurementReadingDate {
-  constructor(readonly value: Date) {
-    this.ensureValueIsDefined(value);
-    this.ensureDateIsValid(value);
+  readonly value: Date;
+
+  constructor(value: Date | string) {
+    const dateValue = this.convertToDate(value);
+    this.ensureValueIsDefined(dateValue);
+    this.ensureDateIsValid(dateValue);
+    this.value = dateValue;
+  }
+
+  private convertToDate(value: Date | string): Date {
+    if (typeof value === 'string') {
+      const date = new Date(value);
+      if (isNaN(date.getTime())) {
+        throw new InvalidArgumentError("Invalid date format");
+      }
+      return date;
+    }
+    return value;
   }
 
   private ensureValueIsDefined(value: Date): void {

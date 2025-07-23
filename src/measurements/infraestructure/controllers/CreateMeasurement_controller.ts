@@ -11,6 +11,8 @@ export class CreateMeasurementController {
 
     const measurementDTO = req.body as MeasurementDTO;
 
+    console.log(measurementDTO)
+
     try {
 
       await this.createMeasurementUseCase.execute(measurementDTO);
