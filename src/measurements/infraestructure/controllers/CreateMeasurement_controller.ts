@@ -5,13 +5,13 @@ import { InvalidArgumentError } from "../../../shared/errors/InvalidArgument_err
 
 export class CreateMeasurementController {
 
-  constructor(private readonly createMeasurementUseCase: CreateMeasurementUseCase){}
+  constructor(
+    private readonly createMeasurementUseCase: CreateMeasurementUseCase
+  ){}
 
   execute = async (req: Request, res: Response): Promise<any> => {
 
     const measurementDTO = req.body as MeasurementDTO;
-
-    console.log(measurementDTO)
 
     try {
 

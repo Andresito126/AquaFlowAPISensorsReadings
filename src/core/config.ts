@@ -12,5 +12,6 @@ export const config =  {
   PORT_SERVER: process.env.PORT_SERVER,
   SALT: process.env.SALT,
   HTTP_ONLY: process.env.HTTP_ONLY,
-  AVAILABLE_DOMAINS: process.env.AVAILABLE_DOMAINS
+  AVAILABLE_DOMAINS: process.env.AVAILABLE_DOMAINS,
+  WEATHER_API_KEY: process.env.WEATHER_API_KEY
 }

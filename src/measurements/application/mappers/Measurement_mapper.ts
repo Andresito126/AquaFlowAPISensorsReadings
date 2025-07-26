@@ -8,7 +8,7 @@ import { MeasurementODTO } from "../dtos/outputs/Measurement_dto";
 
 export class MeasurementMapper {
 
-  static toMeasurement({ measurementId, sensorId, value, readingDate }: MeasurementDTO): Measurement {
+  static toMeasurement({ measurementId,sensorId, value, readingDate }: MeasurementDTO): Measurement {
     return new Measurement(
       new MeasurementId(measurementId),
       new SensorId(sensorId),
